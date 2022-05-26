@@ -3,7 +3,7 @@ public class Byte
     private final String b;
 
 
-    public Byte(String b) throws WrongByteLength
+    public Byte(String b)
     {
         if (b.length() > 2 || b.isEmpty())
             throw new WrongByteLength();
@@ -15,19 +15,21 @@ public class Byte
             this.b = b;
     }
 
-    public Byte first() throws WrongByteLength {
+    public Byte first() {
         return new Byte(this.b.substring(0, 1));
     }
 
-    public Byte last() throws WrongByteLength {
+    public Byte last() {
         return new Byte(this.b.substring(1, 2));
     }
+
+    public int toDec() { return Integer.parseInt(b,16); }
 
     public String toString() { return this.b; }
 }
 
 
-class WrongByteLength extends Exception {
+class WrongByteLength extends Error {
     public WrongByteLength() {
         super("This byte is either too long, or too short");
     }

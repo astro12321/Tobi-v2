@@ -1,16 +1,16 @@
 //for debug: https://hpd.gasmi.net/
 //45000054a63e400040017a590a0000020808080808004b8c6fa400027b938d620000000066040f0000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637
-
-
 public class Tobi {
-
     static { System.loadLibrary("native"); }
 
     private native String getPkt();
     private native void sendPkt(String pkt);
     private native void kamui();
 
-    public static void main(String[] args) throws WrongByteLength {
+    public static String HOSTIP = "10.0.0.2"; //Host machine IP set in the createInterface script, static value
+
+
+    public static void main(String[] args) {
         int ind = 0;
 
         Tobi self = new Tobi();
@@ -28,7 +28,20 @@ public class Tobi {
                 Hex pktHex = new Hex(rawPkt);
                 Packet pkt = new Packet(ind, pktHex);
 
-                System.out.println(pkt.getIndex() + ". " + pkt + "\n");
+                if(pkt.isNetworkLayerOK()) {
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println(pkt.getIndex() + ". Packet: " + pkt.getDirection());
+                    System.out.println();
+                    System.out.println("Packet hex: ");
+                    System.out.println(pkt);
+                    System.out.println();
+                    System.out.println("Network:");
+                    System.out.println(pkt.getNetwork().getHex());
+                    System.out.println("SourceIP: " + pkt.getSourceIP());
+                    System.out.println("DestIP: " + pkt.getDestIP());
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("\n");
+                }
 
                 self.sendPkt(pkt.toString());
             }

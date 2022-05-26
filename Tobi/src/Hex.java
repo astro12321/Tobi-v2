@@ -3,8 +3,9 @@ import java.util.ArrayList;
 public class Hex extends ArrayList<Byte>
 {
 
+    public Hex() { } //Empty Byte
 
-    public Hex(String h) throws WrongByteLength
+    public Hex(String h)
     {
         for (int i = 0; i < h.length(); i +=2)
         {
@@ -19,6 +20,7 @@ public class Hex extends ArrayList<Byte>
         }
     }
 
+
     public String toString() {
         StringBuilder t = new StringBuilder();
 
@@ -28,4 +30,21 @@ public class Hex extends ArrayList<Byte>
         return t.toString();
     }
 
+
+    public Hex get(int beginning, int end) {
+        Hex t = new Hex();
+
+        for (int i = beginning; i < end; i++)
+            t.add(this.get(i));
+
+        return t;
+    }
+
+}
+
+
+class WrongHexLength extends Error {
+    public WrongHexLength() {
+        super("This hex is either too long, or too short");
+    }
 }
