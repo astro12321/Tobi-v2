@@ -28,17 +28,50 @@ public class Tobi {
                 Hex pktHex = new Hex(rawPkt);
                 Packet pkt = new Packet(ind, pktHex);
 
+                System.out.println("----------------------------------------------------------------");
+                System.out.println(pkt.getIndex() + ". Packet: " + pkt.getDirection());
+                System.out.println();
+
+                System.out.println("Packet hex: ");
+                System.out.println(pkt);
+                System.out.println();
+
                 if(pkt.isNetworkLayerOK()) {
-                    System.out.println("----------------------------------------------------------------");
-                    System.out.println(pkt.getIndex() + ". Packet: " + pkt.getDirection());
-                    System.out.println();
-                    System.out.println("Packet hex: ");
-                    System.out.println(pkt);
-                    System.out.println();
                     System.out.println("Network:");
                     System.out.println(pkt.getNetwork().getHex());
+                    System.out.println();
                     System.out.println("SourceIP: " + pkt.getSourceIP());
                     System.out.println("DestIP: " + pkt.getDestIP());
+                    System.out.println("\n");
+
+                    if(pkt.isTransportLayerOK()) {
+                        System.out.println("Transport:");
+                        System.out.println(pkt.getTransport().getHex());
+                        System.out.println();
+
+                        if(pkt.getTransport() instanceof ICMP)
+                        {
+                            System.out.println("Protocol: " + pkt.getTransport().getClass());
+                            System.out.println("Type: " + pkt.getTransport().getType());
+                            System.out.println("Code: " + pkt.getTransport().getCode());
+                            System.out.println("Csum: " + pkt.getTransport().getCsum());
+                            System.out.println("Data: " + pkt.getTransport().getData());
+                        }
+                        else if(pkt.getTransport() instanceof TCP)
+                        {
+                            System.out.println("Protocol: " + pkt.getTransport().getClass());
+                            System.out.println("Source Port: " + pkt.getSourcePort());
+                            System.out.println("Dest Port: " + pkt.getDestPort());
+                            System.out.println("Seq Number: " + pkt.getTransport().getSeqNumber());
+                            System.out.println("Ack Number: " + pkt.getTransport().getAckNumber());
+                            System.out.println("Header Length: " + pkt.getTransport().getHdrLen());
+                            System.out.println("Window: " + pkt.getTransport().getWindow());
+                            System.out.println("Checksum: " + pkt.getTransport().getCsum());
+                        }
+
+                        System.out.println("\n");
+                    }
+                    
                     System.out.println("----------------------------------------------------------------");
                     System.out.println("\n");
                 }

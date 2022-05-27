@@ -1,9 +1,19 @@
+import java.lang.invoke.WrongMethodTypeException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Hex extends ArrayList<Byte>
 {
 
-    public Hex() { } //Empty Byte
+    public Hex(Hex h) {
+        this.addAll(h);
+    }
+
+
+    public Hex(Byte b) {
+        this.add(b);
+    }
+
 
     public Hex(String h)
     {
@@ -31,15 +41,25 @@ public class Hex extends ArrayList<Byte>
     }
 
 
-    public Hex get(int beginning, int end) {
-        Hex t = new Hex();
+    public String toHexString(){
+        return "0x" + this.toString();
+    }
 
-        for (int i = beginning; i < end; i++)
+
+    public Hex get(int beginning, int end) {
+        if (end == -1)
+            end = this.size();
+
+        Hex t = new Hex(this.get(beginning));
+
+        for (int i = beginning + 1; i < end; i++)
             t.add(this.get(i));
 
         return t;
     }
 
+
+    public int toDec() { return Integer.parseInt(this.toString(),16); }
 }
 
 

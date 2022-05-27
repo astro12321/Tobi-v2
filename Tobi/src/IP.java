@@ -5,6 +5,11 @@ public class IP {
     public String toString() { return this.ip; }
 
 
+    public IP(String ip) {
+        this.ip = ip;
+    }
+
+
     public IP(Hex hex) {
         if (hex.size() != 4)
             throw new WrongHexLength();
