@@ -1,6 +1,4 @@
-import java.lang.invoke.WrongMethodTypeException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Hex extends ArrayList<Byte>
 {
@@ -19,7 +17,7 @@ public class Hex extends ArrayList<Byte>
     {
         for (int i = 0; i < h.length(); i +=2)
         {
-            String b = "";
+            String b;
 
             if (i + 2 > h.length())
                 b = h.substring(i, i + 1);
@@ -42,13 +40,17 @@ public class Hex extends ArrayList<Byte>
 
 
     public String toHexString(){
-        return "0x" + this.toString();
+        return "0x" + this;
     }
 
 
     public Hex get(int beginning, int end) {
         if (end == -1)
             end = this.size();
+        if(end < beginning)
+            throw new WrongHexLength();
+        if(end - beginning == this.size() || beginning == end)
+            return this;
 
         Hex t = new Hex(this.get(beginning));
 

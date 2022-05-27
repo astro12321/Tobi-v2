@@ -42,6 +42,7 @@ public class Tobi {
                     System.out.println();
                     System.out.println("SourceIP: " + pkt.getSourceIP());
                     System.out.println("DestIP: " + pkt.getDestIP());
+                    System.out.println("TTl: " + pkt.getNetwork().getTtl());
                     System.out.println("\n");
 
                     if(pkt.isTransportLayerOK()) {
@@ -49,16 +50,14 @@ public class Tobi {
                         System.out.println(pkt.getTransport().getHex());
                         System.out.println();
 
-                        if(pkt.getTransport() instanceof ICMP)
-                        {
+                        if(pkt.getTransport() instanceof ICMP) {
                             System.out.println("Protocol: " + pkt.getTransport().getClass());
                             System.out.println("Type: " + pkt.getTransport().getType());
                             System.out.println("Code: " + pkt.getTransport().getCode());
                             System.out.println("Csum: " + pkt.getTransport().getCsum());
                             System.out.println("Data: " + pkt.getTransport().getData());
                         }
-                        else if(pkt.getTransport() instanceof TCP)
-                        {
+                        else if(pkt.getTransport() instanceof TCP) {
                             System.out.println("Protocol: " + pkt.getTransport().getClass());
                             System.out.println("Source Port: " + pkt.getSourcePort());
                             System.out.println("Dest Port: " + pkt.getDestPort());
@@ -68,10 +67,16 @@ public class Tobi {
                             System.out.println("Window: " + pkt.getTransport().getWindow());
                             System.out.println("Checksum: " + pkt.getTransport().getCsum());
                         }
+                        else if(pkt.getTransport() instanceof UDP) {
+                            System.out.println("Protocol: " + pkt.getTransport().getClass());
+                            System.out.println("Source Port: " + pkt.getSourcePort());
+                            System.out.println("Dest Port: " + pkt.getDestPort());
+                            System.out.println("Checksum: " + pkt.getTransport().getCsum());
+                        }
 
                         System.out.println("\n");
                     }
-                    
+
                     System.out.println("----------------------------------------------------------------");
                     System.out.println("\n");
                 }
