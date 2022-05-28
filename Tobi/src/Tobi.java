@@ -40,6 +40,7 @@ public class Tobi {
                     System.out.println("Network:");
                     System.out.println(pkt.getNetwork().getHex());
                     System.out.println();
+                    System.out.println("Protocol: " + pkt.getNetwork().getClass());
                     System.out.println("SourceIP: " + pkt.getSourceIP());
                     System.out.println("DestIP: " + pkt.getDestIP());
                     System.out.println("TTl: " + pkt.getNetwork().getTtl());
@@ -73,8 +74,15 @@ public class Tobi {
                             System.out.println("Dest Port: " + pkt.getDestPort());
                             System.out.println("Checksum: " + pkt.getTransport().getCsum());
                         }
-
                         System.out.println("\n");
+
+                        if(pkt.isApplicationLayerOK()){
+                            System.out.println("Application:");
+                            System.out.println(pkt.getApplication().getHex());
+                            System.out.println();
+                            System.out.println("Protocol: " + pkt.getApplication().getClass());
+                            System.out.println();
+                        }
                     }
 
                     System.out.println("----------------------------------------------------------------");

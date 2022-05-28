@@ -4,8 +4,9 @@ public class Packet {
     private final Hex hex;
     private final int index;
     private final Direction direction;
-    private Network network = null;
-    private Transport transport = null;
+    private final Network network;
+    private final Transport transport;
+    private final Application application;
 
 
     public int getIndex() { return this.index; }
@@ -19,6 +20,8 @@ public class Packet {
     public int getSourcePort() { return this.getTransport().getSource(); }
     public int getDestPort() { return this.getTransport().getDest(); }
 
+    public Application getApplication() { return this.application; }
+
 
     public boolean isNetworkLayerOK() {
         return this.network != null;
@@ -26,33 +29,40 @@ public class Packet {
     public boolean isTransportLayerOK() {
         return this.transport != null;
     }
+    public boolean isApplicationLayerOK() {
+        return this.application != null;
+    }
 
 
     public Packet(int index, Hex hex) {
+        Hex tempHex;
+
         this.index = index;
         this.hex = hex;
 
-        Hex tempHex = new Hex(this.hex);
-
-        this.network = Parser.FindNetworkProto(tempHex);
+        this.network = Parser.FindNetworkProto(hex);
 
         if(this.isNetworkLayerOK()) {
             this.direction = findPacketDirection(this.getSourceIP());
 
             //Remove the network part of the hex
-            tempHex = tempHex.get(this.getNetwork().getHex().size(), -1);
+            tempHex = hex.get(this.getNetwork().getHex().size(), -1);
 
             this.transport = Parser.FindTransportProto(tempHex, this.getNetwork().getTransportProto());
 
-            if(this.isTransportLayerOK()) {
-                //Remove the transport part of the hex
-                tempHex = tempHex.get(this.getTransport().getHex().size(), -1);
+            //Only keep the application part of the packet hex (if there's any)
+            tempHex = tempHex.get(this.getTransport().getHex().size(), -1);
 
-                //Application Layer
-            }
+            if(this.isTransportLayerOK() && tempHex != null)
+                this.application = Parser.FindApplicationProto(tempHex);
+            else
+                this.application = null;
         }
-        else
+        else {
             this.direction = Direction.UNDEF;
+            this.transport = null;
+            this.application = null;
+        }
     }
 
 

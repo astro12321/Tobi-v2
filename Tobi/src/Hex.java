@@ -49,8 +49,10 @@ public class Hex extends ArrayList<Byte>
             end = this.size();
         if(end < beginning)
             throw new WrongHexLength();
-        if(end - beginning == this.size() || beginning == end)
+        if(end - beginning == this.size())
             return this;
+        if(beginning == end)
+            return null;
 
         Hex t = new Hex(this.get(beginning));
 
