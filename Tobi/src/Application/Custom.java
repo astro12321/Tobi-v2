@@ -1,3 +1,10 @@
+package Application;
+
+import Tobi.*;
+import DataTypes.*;
+import Network.*;
+import Transport.*;
+
 public class Custom extends Application
 {
     private final Hex hex;

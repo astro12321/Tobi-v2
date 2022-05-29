@@ -1,3 +1,10 @@
+package DataTypes;
+
+import Tobi.*;
+import Network.*;
+import Transport.*;
+import Application.*;
+
 enum Direction { SENT, RECV, UNDEF }
 
 public class Packet {
@@ -73,5 +80,5 @@ public class Packet {
     }
 
 
-    public String toString() { return this.hex.toString(); }
+    public Hex getHex() { return this.hex; }
 }

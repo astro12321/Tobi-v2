@@ -1,8 +1,14 @@
+package DataTypes;
+
+import Tobi.*;
+import Network.*;
+import Transport.*;
+import Application.*;
+
 import java.util.ArrayList;
 
 public class Hex extends ArrayList<Byte>
 {
-
     public Hex(Hex h) {
         this.addAll(h);
     }

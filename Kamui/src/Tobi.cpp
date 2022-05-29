@@ -1,4 +1,4 @@
-#include "Tobi.h"
+#include "Tobi_Tobi.h"
 
 #include <string.h>
 #include <unistd.h>
@@ -72,7 +72,7 @@ std::vector<unsigned char> stringToHex(std::string str)
 }
 
 
-JNIEXPORT void JNICALL Java_Tobi_kamui(JNIEnv *env, jobject thisObject)
+JNIEXPORT void JNICALL Java_Tobi_Tobi_kamui(JNIEnv *env, jobject thisObject)
 {
     opentun(devname, &fdTun);
 
@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_Tobi_kamui(JNIEnv *env, jobject thisObject)
 }
 
 
-JNIEXPORT void JNICALL Java_Tobi_sendPkt(JNIEnv *env, jobject thisObject, jstring jniPkt) 
+JNIEXPORT void JNICALL Java_Tobi_Tobi_sendPkt(JNIEnv *env, jobject thisObject, jstring jniPkt) 
 {
     const char *buffer = env->GetStringUTFChars(jniPkt, NULL);
 
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_Tobi_sendPkt(JNIEnv *env, jobject thisObject, jstrin
 }
 
 
-JNIEXPORT jstring JNICALL Java_Tobi_getPkt(JNIEnv *env, jobject thisObject) 
+JNIEXPORT jstring JNICALL Java_Tobi_Tobi_getPkt(JNIEnv *env, jobject thisObject) 
 {
     std::string result = ".";
 

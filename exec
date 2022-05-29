@@ -7,9 +7,9 @@ CPP_INCLUDE=Kamui/include/
 CPP_BIN=Kamui/bin
 CPP_SRC=Kamui/src
 
-javac -d $JAVA_BIN -h $CPP_INCLUDE $JAVA_SRC/*.java
+javac -d $JAVA_BIN -h $CPP_INCLUDE $JAVA_SRC/*/*.java
 
 g++ $CPP_SRC/Tobi.cpp -I /usr/lib/jvm/java-17-openjdk-amd64/include/ -I /usr/lib/jvm/java-17-openjdk-amd64/include/linux -I $CPP_INCLUDE -shared -c -fPIC -Wall -o $CPP_BIN/Tobi.o
 g++ -shared -fPIC -o $CPP_BIN/libnative.so $CPP_BIN/Tobi.o -lc
 
-java -cp $JAVA_BIN -Djava.library.path=$CPP_BIN Tobi
+java -Djava.library.path=$CPP_BIN -cp $JAVA_BIN Tobi.Tobi

@@ -1,3 +1,10 @@
+package Transport;
+
+import Tobi.*;
+import DataTypes.*;
+import Network.*;
+import Application.*;
+
 public abstract class Transport {
     public Hex getHex() { return new Hex("00"); }
     public int getType() { return -1; }

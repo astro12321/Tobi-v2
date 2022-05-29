@@ -1,3 +1,10 @@
+package Tobi;
+
+import DataTypes.*;
+import Network.*;
+import Transport.*;
+import Application.*;
+
 public class Parser
 {
     public static Network FindNetworkProto(Hex hex) {

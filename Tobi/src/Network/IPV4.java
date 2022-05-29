@@ -1,3 +1,11 @@
+package Network;
+
+import Tobi.*;
+import DataTypes.*;
+import DataTypes.Byte;
+import Transport.*;
+import Application.*;
+
 public class IPV4 extends Network
 {
     private final Hex hex;

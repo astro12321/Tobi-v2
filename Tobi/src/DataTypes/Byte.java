@@ -1,3 +1,10 @@
+package DataTypes;
+
+import Tobi.*;
+import Network.*;
+import Transport.*;
+import Application.*;
+
 public class Byte
 {
     private final String b;

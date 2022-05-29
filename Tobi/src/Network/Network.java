@@ -1,3 +1,10 @@
+package Network;
+
+import Tobi.*;
+import DataTypes.*;
+import Transport.*;
+import Application.*;
+
 public abstract class Network {
     public Hex getHex() { return new Hex("00"); }
     public IP getSource() { return new IP("UNDEF"); }
