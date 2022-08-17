@@ -1,6 +1,6 @@
 # Tobi-v2
 
-A C++ packet intercepter using a TUN interface on linux
+A C++ packet interceptor using a TUN interface on linux
 
 Get started with :
 
